@@ -93,6 +93,15 @@ public sealed class MemberRecord : IrRecord
     public bool Pure { get; set; }
     public bool Inline { get; set; }
     public bool Defined { get; set; }
+
+    /// <summary>
+    /// True when the declaration itself has no body but its template instantiation pattern
+    /// does. A member of an implicit class-template specialization reports
+    /// <see cref="Defined"/> false while the pattern still declares the body the shim would
+    /// instantiate.
+    /// </summary>
+    public bool PatternDefined { get; set; }
+
     public bool Consteval { get; set; }
     public bool VariableTemplate { get; set; }
     public bool MemberTemplate { get; set; }
