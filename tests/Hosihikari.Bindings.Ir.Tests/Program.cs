@@ -13,7 +13,7 @@ void Check(string name, bool condition)
 
 var manifest = new IrManifest
 {
-    Frontend = new FrontendInfo { Name = "libtooling", Version = "0.1.0", Llvm = "23.1.3" },
+    Frontend = new FrontendInfo { Name = "libtooling", Version = "0.1.0", Llvm = "23.1.0" },
     Sources = [new SourcePin { Surface = "bedrock", Repo = "LiteLDev/LeviLamina", Commit = "abc", Path = "src/mc" }],
     Configurations =
     [
