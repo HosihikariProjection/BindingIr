@@ -102,6 +102,13 @@ public sealed class MemberRecord : IrRecord
     /// </summary>
     public bool PatternDefined { get; set; }
 
+    /// <summary>
+    /// True when the instantiation pattern is itself a member template. Such a member
+    /// re-deduces its template arguments at the call site, so the recorded parameter types
+    /// may not satisfy its constraints.
+    /// </summary>
+    public bool PatternTemplate { get; set; }
+
     public bool Consteval { get; set; }
     public bool VariableTemplate { get; set; }
     public bool MemberTemplate { get; set; }
