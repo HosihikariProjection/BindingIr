@@ -1,4 +1,4 @@
-# Hosihikari.Bindings.Ir
+# Hosihikari.Binding.Ir
 
 [English](README.md) | [简体中文](README.zh_hans.md)
 
@@ -15,13 +15,13 @@ This repository contains only the contract: the JSONL schema, the C# model, the 
 
 | Path | Purpose |
 |---|---|
-| `src/Hosihikari.Bindings.Ir` | Models, JSONL reader/writer, canonical JSON + SHA-256, validators |
-| `tests/Hosihikari.Bindings.Ir.Tests` | Dependency-free assertion host; exits non-zero on failure |
+| `src/Hosihikari.Binding.Ir` | Models, JSONL reader/writer, canonical JSON + SHA-256, validators |
+| `tests/Hosihikari.Binding.Ir.Tests` | Dependency-free assertion host; exits non-zero on failure |
 
 ## Build and verify
 
 ```shell
-dotnet run --project tests/Hosihikari.Bindings.Ir.Tests/Hosihikari.Bindings.Ir.Tests.csproj -c Release
+dotnet run --project tests/Hosihikari.Binding.Ir.Tests/Hosihikari.Binding.Ir.Tests.csproj -c Release
 ```
 
 The test host covers record/manifest round-trips, polymorphic records, canonical hashing, enum names, and the strict coverage gate (unknown entries, duplicate `(id, configuration)` keys, missing reasons, count mismatches).

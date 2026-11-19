@@ -2,7 +2,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Hosihikari.Bindings.Ir;
+namespace Hosihikari.Binding.Ir;
 
 public static class IrJson
 {

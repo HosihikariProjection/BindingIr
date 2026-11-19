@@ -1,5 +1,5 @@
 using System.Text;
-using Hosihikari.Bindings.Ir;
+using Hosihikari.Binding.Ir;
 
 var failures = new List<string>();
 

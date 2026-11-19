@@ -1,7 +1,7 @@
 using System.Text;
 using System.Text.Json;
 
-namespace Hosihikari.Bindings.Ir;
+namespace Hosihikari.Binding.Ir;
 
 public static class IrCanonicalJson
 {

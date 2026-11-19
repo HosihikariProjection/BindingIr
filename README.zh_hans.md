@@ -1,4 +1,4 @@
-# Hosihikari.Bindings.Ir
+# Hosihikari.Binding.Ir
 
 [English](README.md) | [简体中文](README.zh_hans.md)
 
@@ -15,13 +15,13 @@
 
 | 路径 | 用途 |
 |---|---|
-| `src/Hosihikari.Bindings.Ir` | 模型、JSONL 读写、规范 JSON + SHA-256、校验器 |
-| `tests/Hosihikari.Bindings.Ir.Tests` | 无依赖断言载体；失败时以非零退出 |
+| `src/Hosihikari.Binding.Ir` | 模型、JSONL 读写、规范 JSON + SHA-256、校验器 |
+| `tests/Hosihikari.Binding.Ir.Tests` | 无依赖断言载体；失败时以非零退出 |
 
 ## 构建与验证
 
 ```shell
-dotnet run --project tests/Hosihikari.Bindings.Ir.Tests/Hosihikari.Bindings.Ir.Tests.csproj -c Release
+dotnet run --project tests/Hosihikari.Binding.Ir.Tests/Hosihikari.Binding.Ir.Tests.csproj -c Release
 ```
 
 断言载体覆盖记录/清单往返、多态记录、规范哈希、枚举名，以及严格覆盖门禁（unknown、重复 `(id, configuration)`、缺失原因、计数不一致）。

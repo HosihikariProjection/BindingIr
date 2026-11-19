@@ -1,7 +1,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Hosihikari.Bindings.Ir;
+namespace Hosihikari.Binding.Ir;
 
 public static class IrHash
 {

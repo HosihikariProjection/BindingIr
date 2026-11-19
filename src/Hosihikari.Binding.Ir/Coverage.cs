@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace Hosihikari.Bindings.Ir;
+namespace Hosihikari.Binding.Ir;
 
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum CoverageStatus

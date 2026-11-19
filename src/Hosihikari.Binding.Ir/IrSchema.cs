@@ -1,4 +1,4 @@
-namespace Hosihikari.Bindings.Ir;
+namespace Hosihikari.Binding.Ir;
 
 public static class IrSchema
 {

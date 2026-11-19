@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Hosihikari.Binding.Ir/Hosihikari.Binding.Ir.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Hosihikari.Binding.Ir.Tests/Hosihikari.Binding.Ir.Tests.csproj" />
+  </Folder>
+</Solution>

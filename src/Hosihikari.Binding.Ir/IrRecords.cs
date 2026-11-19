@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace Hosihikari.Bindings.Ir;
+namespace Hosihikari.Binding.Ir;
 
 [JsonPolymorphic(TypeDiscriminatorPropertyName = "recordType")]
 [JsonDerivedType(typeof(DeclarationRecord), "declaration")]
