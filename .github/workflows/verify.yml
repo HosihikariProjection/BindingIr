@@ -16,4 +16,4 @@ jobs:
       - name: Contract checks
         run: dotnet run --project tests/Hosihikari.Binding.Ir.Tests/Hosihikari.Binding.Ir.Tests.csproj -c Release
       - name: Formatting
-        run: dotnet format Hosihikari.Binding.Ir.slnx --verify-no-changes
+        run: dotnet format Hosihikari.Binding.Ir.slnx --verify-no-changes --include src tests
