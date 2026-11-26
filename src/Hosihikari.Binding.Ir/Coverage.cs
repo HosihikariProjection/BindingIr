@@ -5,34 +5,78 @@ namespace Hosihikari.Binding.Ir;
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum CoverageStatus
 {
-    [JsonStringEnumMemberName("bound")] Bound,
-    [JsonStringEnumMemberName("skipped")] Skipped,
-    [JsonStringEnumMemberName("excluded")] Excluded,
-    [JsonStringEnumMemberName("unknown")] Unknown,
+    [JsonStringEnumMemberName("bound")]
+    Bound,
+
+    [JsonStringEnumMemberName("skipped")]
+    Skipped,
+
+    [JsonStringEnumMemberName("excluded")]
+    Excluded,
+
+    [JsonStringEnumMemberName("unknown")]
+    Unknown,
 }
 
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum CoverageReason
 {
-    [JsonStringEnumMemberName("not_public")] NotPublic,
-    [JsonStringEnumMemberName("private")] Private,
-    [JsonStringEnumMemberName("mcnaqi")] Mcnaqi,
-    [JsonStringEnumMemberName("internal_linkage")] InternalLinkage,
-    [JsonStringEnumMemberName("unnamed_type")] UnnamedType,
-    [JsonStringEnumMemberName("template_declaration")] TemplateDeclaration,
-    [JsonStringEnumMemberName("function_macro")] FunctionMacro,
-    [JsonStringEnumMemberName("friend")] Friend,
-    [JsonStringEnumMemberName("deleted")] Deleted,
-    [JsonStringEnumMemberName("platform_mismatch")] PlatformMismatch,
-    [JsonStringEnumMemberName("out_of_scope")] OutOfScope,
-    [JsonStringEnumMemberName("unrepresentable_type")] UnrepresentableType,
-    [JsonStringEnumMemberName("inaccessible_constructor")] InaccessibleConstructor,
-    [JsonStringEnumMemberName("by_value_derived")] ByValueDerived,
-    [JsonStringEnumMemberName("no_layout")] NoLayout,
-    [JsonStringEnumMemberName("operator_unmappable")] OperatorUnmappable,
-    [JsonStringEnumMemberName("varargs_unsupported")] VarargsUnsupported,
-    [JsonStringEnumMemberName("requires_missing_instantiation")] RequiresMissingInstantiation,
-    [JsonStringEnumMemberName("macro_only")] MacroOnly,
+    [JsonStringEnumMemberName("not_public")]
+    NotPublic,
+
+    [JsonStringEnumMemberName("private")]
+    Private,
+
+    [JsonStringEnumMemberName("mcnaqi")]
+    Mcnaqi,
+
+    [JsonStringEnumMemberName("internal_linkage")]
+    InternalLinkage,
+
+    [JsonStringEnumMemberName("unnamed_type")]
+    UnnamedType,
+
+    [JsonStringEnumMemberName("template_declaration")]
+    TemplateDeclaration,
+
+    [JsonStringEnumMemberName("function_macro")]
+    FunctionMacro,
+
+    [JsonStringEnumMemberName("friend")]
+    Friend,
+
+    [JsonStringEnumMemberName("deleted")]
+    Deleted,
+
+    [JsonStringEnumMemberName("platform_mismatch")]
+    PlatformMismatch,
+
+    [JsonStringEnumMemberName("out_of_scope")]
+    OutOfScope,
+
+    [JsonStringEnumMemberName("unrepresentable_type")]
+    UnrepresentableType,
+
+    [JsonStringEnumMemberName("inaccessible_constructor")]
+    InaccessibleConstructor,
+
+    [JsonStringEnumMemberName("by_value_derived")]
+    ByValueDerived,
+
+    [JsonStringEnumMemberName("no_layout")]
+    NoLayout,
+
+    [JsonStringEnumMemberName("operator_unmappable")]
+    OperatorUnmappable,
+
+    [JsonStringEnumMemberName("varargs_unsupported")]
+    VarargsUnsupported,
+
+    [JsonStringEnumMemberName("requires_missing_instantiation")]
+    RequiresMissingInstantiation,
+
+    [JsonStringEnumMemberName("macro_only")]
+    MacroOnly,
 }
 
 public sealed class CoverageEntry

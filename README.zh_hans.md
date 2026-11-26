@@ -13,10 +13,10 @@
 
 ## 工程
 
-| 路径 | 用途 |
-|---|---|
-| `src/Hosihikari.Binding.Ir` | 模型、JSONL 读写、规范 JSON + SHA-256、校验器 |
-| `tests/Hosihikari.Binding.Ir.Tests` | 无依赖断言载体；失败时以非零退出 |
+| 路径                                | 用途                                          |
+| ----------------------------------- | --------------------------------------------- |
+| `src/Hosihikari.Binding.Ir`         | 模型、JSONL 读写、规范 JSON + SHA-256、校验器 |
+| `tests/Hosihikari.Binding.Ir.Tests` | 无依赖断言载体；失败时以非零退出              |
 
 ## 构建与验证
 

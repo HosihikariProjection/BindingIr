@@ -13,10 +13,10 @@ This repository contains only the contract: the JSONL schema, the C# model, the 
 
 ## Projects
 
-| Path | Purpose |
-|---|---|
-| `src/Hosihikari.Binding.Ir` | Models, JSONL reader/writer, canonical JSON + SHA-256, validators |
-| `tests/Hosihikari.Binding.Ir.Tests` | Dependency-free assertion host; exits non-zero on failure |
+| Path                                | Purpose                                                           |
+| ----------------------------------- | ----------------------------------------------------------------- |
+| `src/Hosihikari.Binding.Ir`         | Models, JSONL reader/writer, canonical JSON + SHA-256, validators |
+| `tests/Hosihikari.Binding.Ir.Tests` | Dependency-free assertion host; exits non-zero on failure         |
 
 ## Build and verify
 

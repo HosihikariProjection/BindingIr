@@ -4,16 +4,42 @@ public sealed class IrValidationResult
 {
     public List<string> Errors { get; } = [];
     public bool IsValid => Errors.Count == 0;
+
     public void Add(string error) => Errors.Add(error);
 }
 
 public static class IrValidator
 {
-    private static readonly HashSet<string> Surfaces = new(StringComparer.Ordinal) { "bedrock", "levilamina", "endstone" };
-    private static readonly HashSet<string> Access = new(StringComparer.Ordinal) { "public", "protected", "private", "unknown" };
-    private static readonly HashSet<string> Availability = new(StringComparer.Ordinal) { "present", "absent" };
-    private static readonly HashSet<string> Emitters = new(StringComparer.Ordinal) { "interop", "shim" };
-    private static readonly HashSet<string> Severities = new(StringComparer.Ordinal) { "error", "fatal", "warning", "note" };
+    private static readonly HashSet<string> Surfaces = new(StringComparer.Ordinal)
+    {
+        "bedrock",
+        "levilamina",
+        "endstone",
+    };
+    private static readonly HashSet<string> Access = new(StringComparer.Ordinal)
+    {
+        "public",
+        "protected",
+        "private",
+        "unknown",
+    };
+    private static readonly HashSet<string> Availability = new(StringComparer.Ordinal)
+    {
+        "present",
+        "absent",
+    };
+    private static readonly HashSet<string> Emitters = new(StringComparer.Ordinal)
+    {
+        "interop",
+        "shim",
+    };
+    private static readonly HashSet<string> Severities = new(StringComparer.Ordinal)
+    {
+        "error",
+        "fatal",
+        "warning",
+        "note",
+    };
 
     public static IrValidationResult Validate(IrManifest manifest, IReadOnlyList<IrRecord> records)
     {
@@ -63,7 +89,9 @@ public static class IrValidator
         {
             if (!configurations.Contains(shard.Configuration))
             {
-                result.Add($"shard '{shard.Path}' references unknown configuration '{shard.Configuration}'.");
+                result.Add(
+                    $"shard '{shard.Path}' references unknown configuration '{shard.Configuration}'."
+                );
             }
 
             if (string.IsNullOrWhiteSpace(shard.Path) || string.IsNullOrWhiteSpace(shard.Sha256))
@@ -78,7 +106,8 @@ public static class IrValidator
         }
 
         var declarations = new Dictionary<string, DeclarationRecord>(StringComparer.Ordinal);
-        var declarationIds = records.OfType<DeclarationRecord>()
+        var declarationIds = records
+            .OfType<DeclarationRecord>()
             .Select(declaration => declaration.Id)
             .ToHashSet(StringComparer.Ordinal);
         var members = new HashSet<string>(StringComparer.Ordinal);
@@ -102,12 +131,16 @@ public static class IrValidator
 
                     if (!Surfaces.Contains(declaration.Surface))
                     {
-                        result.Add($"declaration '{declaration.Id}' has unknown surface '{declaration.Surface}'.");
+                        result.Add(
+                            $"declaration '{declaration.Id}' has unknown surface '{declaration.Surface}'."
+                        );
                     }
 
                     if (!Access.Contains(declaration.Access))
                     {
-                        result.Add($"declaration '{declaration.Id}' has unknown access '{declaration.Access}'.");
+                        result.Add(
+                            $"declaration '{declaration.Id}' has unknown access '{declaration.Access}'."
+                        );
                     }
 
                     if (!keys.Add((declaration.Id, "")))
@@ -120,17 +153,23 @@ public static class IrValidator
                 case VariantRecord variant:
                     if (!declarationIds.Contains(variant.DeclarationId))
                     {
-                        result.Add($"variant references unknown declaration '{variant.DeclarationId}'.");
+                        result.Add(
+                            $"variant references unknown declaration '{variant.DeclarationId}'."
+                        );
                     }
 
                     if (!configurations.Contains(variant.Configuration ?? ""))
                     {
-                        result.Add($"variant for '{variant.DeclarationId}' has unknown configuration '{variant.Configuration}'.");
+                        result.Add(
+                            $"variant for '{variant.DeclarationId}' has unknown configuration '{variant.Configuration}'."
+                        );
                     }
 
                     if (!Availability.Contains(variant.Availability))
                     {
-                        result.Add($"variant for '{variant.DeclarationId}' has unknown availability '{variant.Availability}'.");
+                        result.Add(
+                            $"variant for '{variant.DeclarationId}' has unknown availability '{variant.Availability}'."
+                        );
                     }
 
                     break;
@@ -144,17 +183,23 @@ public static class IrValidator
 
                     if (!declarationIds.Contains(member.DeclarationId))
                     {
-                        result.Add($"member '{member.Id}' references unknown declaration '{member.DeclarationId}'.");
+                        result.Add(
+                            $"member '{member.Id}' references unknown declaration '{member.DeclarationId}'."
+                        );
                     }
 
                     if (!configurations.Contains(member.Configuration ?? ""))
                     {
-                        result.Add($"member '{member.Id}' has unknown configuration '{member.Configuration}'.");
+                        result.Add(
+                            $"member '{member.Id}' has unknown configuration '{member.Configuration}'."
+                        );
                     }
 
                     if (!keys.Add((member.Id, member.Configuration ?? "")))
                     {
-                        result.Add($"duplicate record key '({member.Id}, {member.Configuration})'.");
+                        result.Add(
+                            $"duplicate record key '({member.Id}, {member.Configuration})'."
+                        );
                     }
 
                     members.Add(member.Id);
@@ -169,7 +214,14 @@ public static class IrValidator
                         result.Add($"member '{member.Id}' has a negative vtable index.");
                     }
 
-                    if (member.Kind is "field" or "static_field" or "enum_value" or "constant" or "global")
+                    if (
+                        member.Kind
+                        is "field"
+                            or "static_field"
+                            or "enum_value"
+                            or "constant"
+                            or "global"
+                    )
                     {
                         if (member.Type is null || string.IsNullOrWhiteSpace(member.Type.Canonical))
                         {
@@ -181,9 +233,19 @@ public static class IrValidator
                             result.Add($"enum value '{member.Id}' has no integer value.");
                         }
                     }
-                    else if (member.Kind is "method" or "function" or "constructor" or "destructor" or "operator")
+                    else if (
+                        member.Kind
+                        is "method"
+                            or "function"
+                            or "constructor"
+                            or "destructor"
+                            or "operator"
+                    )
                     {
-                        if (member.Signature is null || string.IsNullOrWhiteSpace(member.Signature.Canonical))
+                        if (
+                            member.Signature is null
+                            || string.IsNullOrWhiteSpace(member.Signature.Canonical)
+                        )
                         {
                             result.Add($"member '{member.Id}' has no canonical signature.");
                         }
@@ -192,7 +254,10 @@ public static class IrValidator
                     break;
 
                 case TypeRecord type:
-                    if (string.IsNullOrWhiteSpace(type.Id) || string.IsNullOrWhiteSpace(type.Canonical))
+                    if (
+                        string.IsNullOrWhiteSpace(type.Id)
+                        || string.IsNullOrWhiteSpace(type.Canonical)
+                    )
                     {
                         result.Add("type.id and type.canonical are required.");
                         break;
@@ -216,12 +281,16 @@ public static class IrValidator
                 case DiagnosticRecord diagnostic:
                     if (!Severities.Contains(diagnostic.Severity))
                     {
-                        result.Add($"diagnostic '{diagnostic.Code}' has unknown severity '{diagnostic.Severity}'.");
+                        result.Add(
+                            $"diagnostic '{diagnostic.Code}' has unknown severity '{diagnostic.Severity}'."
+                        );
                     }
 
                     if (diagnostic.Severity is "error" or "fatal")
                     {
-                        result.Add($"diagnostic error '{diagnostic.Code}' at {diagnostic.File}:{diagnostic.Line}.");
+                        result.Add(
+                            $"diagnostic error '{diagnostic.Code}' at {diagnostic.File}:{diagnostic.Line}."
+                        );
                     }
 
                     break;
@@ -239,7 +308,9 @@ public static class IrValidator
             {
                 if (!members.Contains(field.MemberId))
                 {
-                    result.Add($"layout of '{variant.DeclarationId}' references unknown member '{field.MemberId}'.");
+                    result.Add(
+                        $"layout of '{variant.DeclarationId}' references unknown member '{field.MemberId}'."
+                    );
                 }
             }
 
@@ -247,7 +318,9 @@ public static class IrValidator
             {
                 if (!members.Contains(slot.MemberId))
                 {
-                    result.Add($"vtable of '{variant.DeclarationId}' references unknown member '{slot.MemberId}'.");
+                    result.Add(
+                        $"vtable of '{variant.DeclarationId}' references unknown member '{slot.MemberId}'."
+                    );
                 }
             }
         }
@@ -255,7 +328,10 @@ public static class IrValidator
         return result;
     }
 
-    public static IrValidationResult ValidateCoverage(CoverageSummary summary, IReadOnlyList<CoverageEntry> entries)
+    public static IrValidationResult ValidateCoverage(
+        CoverageSummary summary,
+        IReadOnlyList<CoverageEntry> entries
+    )
     {
         var result = new IrValidationResult();
 
@@ -266,7 +342,9 @@ public static class IrValidator
 
         if (!IrSchema.IsCompatibleVersion(summary.IrVersion))
         {
-            result.Add($"coverage.irVersion '{summary.IrVersion}' is not compatible with '{IrSchema.Version}'.");
+            result.Add(
+                $"coverage.irVersion '{summary.IrVersion}' is not compatible with '{IrSchema.Version}'."
+            );
         }
 
         if (summary.Unaccounted.Count > 0)
@@ -312,12 +390,16 @@ public static class IrValidator
                 case CoverageStatus.Excluded:
                     if (entry.Reason is null)
                     {
-                        result.Add($"{entry.Status.ToString().ToLowerInvariant()} entry '{entry.Id}' must have a reason.");
+                        result.Add(
+                            $"{entry.Status.ToString().ToLowerInvariant()} entry '{entry.Id}' must have a reason."
+                        );
                     }
 
                     if (entry.Emitters.Count != 0)
                     {
-                        result.Add($"{entry.Status.ToString().ToLowerInvariant()} entry '{entry.Id}' must not have emitters.");
+                        result.Add(
+                            $"{entry.Status.ToString().ToLowerInvariant()} entry '{entry.Id}' must not have emitters."
+                        );
                     }
 
                     break;
@@ -333,7 +415,12 @@ public static class IrValidator
             result.Add("coverage summary reports unknown entries.");
         }
 
-        CheckCounts(result, "declarations", summary.Declarations, entries.Where(e => e.Parent is null));
+        CheckCounts(
+            result,
+            "declarations",
+            summary.Declarations,
+            entries.Where(e => e.Parent is null)
+        );
         CheckCounts(result, "members", summary.Members, entries.Where(e => e.Parent is not null));
 
         return result;
@@ -342,16 +429,27 @@ public static class IrValidator
     /// <summary>A decimal enumerator value: signed or unsigned, up to 64 bits.</summary>
     private static bool IsIntegerText(string? value) =>
         !string.IsNullOrWhiteSpace(value)
-        && (long.TryParse(value, System.Globalization.NumberStyles.AllowLeadingSign,
-                System.Globalization.CultureInfo.InvariantCulture, out _)
-            || ulong.TryParse(value, System.Globalization.NumberStyles.None,
-                System.Globalization.CultureInfo.InvariantCulture, out _));
+        && (
+            long.TryParse(
+                value,
+                System.Globalization.NumberStyles.AllowLeadingSign,
+                System.Globalization.CultureInfo.InvariantCulture,
+                out _
+            )
+            || ulong.TryParse(
+                value,
+                System.Globalization.NumberStyles.None,
+                System.Globalization.CultureInfo.InvariantCulture,
+                out _
+            )
+        );
 
     private static void CheckCounts(
         IrValidationResult result,
         string label,
         CoverageCounts expected,
-        IEnumerable<CoverageEntry> entries)
+        IEnumerable<CoverageEntry> entries
+    )
     {
         var list = entries.ToList();
         var actual = new CoverageCounts
@@ -363,11 +461,13 @@ public static class IrValidator
             Unknown = list.Count(e => e.Status == CoverageStatus.Unknown),
         };
 
-        if (expected.Total != actual.Total
+        if (
+            expected.Total != actual.Total
             || expected.Bound != actual.Bound
             || expected.Skipped != actual.Skipped
             || expected.Excluded != actual.Excluded
-            || expected.Unknown != actual.Unknown)
+            || expected.Unknown != actual.Unknown
+        )
         {
             result.Add($"coverage summary {label} counts do not match the entries.");
         }

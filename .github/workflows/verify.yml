@@ -12,6 +12,8 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '10.0.x'
+          dotnet-version: "10.0.x"
       - name: Contract checks
         run: dotnet run --project tests/Hosihikari.Binding.Ir.Tests/Hosihikari.Binding.Ir.Tests.csproj -c Release
+      - name: Formatting
+        run: dotnet format Hosihikari.Binding.Ir.slnx --verify-no-changes

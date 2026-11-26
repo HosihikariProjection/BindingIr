@@ -23,7 +23,11 @@ public static class IrCanonicalJson
         {
             case JsonValueKind.Object:
                 writer.WriteStartObject();
-                foreach (var property in element.EnumerateObject().OrderBy(p => p.Name, StringComparer.Ordinal))
+                foreach (
+                    var property in element
+                        .EnumerateObject()
+                        .OrderBy(p => p.Name, StringComparer.Ordinal)
+                )
                 {
                     writer.WritePropertyName(property.Name);
                     WriteCanonical(property.Value, writer);

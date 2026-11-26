@@ -73,7 +73,10 @@ public sealed class IrManifest
     public List<IrShard> Shards { get; set; } = [];
     public IrDiagnostics Diagnostics { get; set; } = new();
     public IrCounts Counts { get; set; } = new();
-    public Dictionary<string, Dictionary<string, IrSupportSymbol>> SupportSymbols { get; set; } = new(StringComparer.Ordinal);
-    public Dictionary<string, Dictionary<string, IrRecordSupport>> RecordSupport { get; set; } = new(StringComparer.Ordinal);
-    public Dictionary<string, Dictionary<string, IrSupportSymbol>> StaticFields { get; set; } = new(StringComparer.Ordinal);
+    public Dictionary<string, Dictionary<string, IrSupportSymbol>> SupportSymbols { get; set; } =
+        new(StringComparer.Ordinal);
+    public Dictionary<string, Dictionary<string, IrRecordSupport>> RecordSupport { get; set; } =
+        new(StringComparer.Ordinal);
+    public Dictionary<string, Dictionary<string, IrSupportSymbol>> StaticFields { get; set; } =
+        new(StringComparer.Ordinal);
 }
