@@ -39,6 +39,12 @@ public sealed class DeclarationRecord : IrRecord
     public bool Abstract { get; set; }
     public bool CopyConstructible { get; set; }
 
+    /// <summary>
+    /// True when <c>std::is_copy_assignable_v&lt;T&gt;</c> holds as Sema evaluates it, which is
+    /// what an assignment written in the shim needs. Empty in IR written before 1.8.
+    /// </summary>
+    public bool? CopyAssignable { get; set; }
+
     /// <summary>True when the record has trivial copy, move, and destructor operations.</summary>
     public bool TriviallyCopyable { get; set; }
 
@@ -114,6 +120,7 @@ public sealed class MemberRecord : IrRecord
     public bool MemberTemplate { get; set; }
     public string? RefQualifier { get; set; }
     public string? OverrideOf { get; set; }
+
     [JsonPropertyName("vtableIndex")]
     public int? VTableIndex { get; set; }
     public long? BitOffset { get; set; }
